@@ -1,13 +1,27 @@
-getData('https://catfact.ninja/facts');
+const apiKey = 'fe556d8602371420048f5a78bde5af9a'
+const zip = [];
 let facts = [];
+function pageTest() {
+getData(`https://api.openweathermap.org/data/2.5/weather?zip=${zip[0]},us&appid=${apiKey}`);
+
 async function getData(url) {
     try {
       const response = await axios.get(url);
-      facts = response.data.data
+      facts = response.data
+      console.log(facts);
+      init()
     } catch (error) {
       console.error('error!bad wesite or bad code! (its your code)');
     }
   }
+}
+
+
+
+function btnPress() {
+  subZip()
+  pageTest()
+}
 
 const main = document.getElementById('main');
 const zipEnter = document.getElementById('zipEnter');
@@ -29,6 +43,7 @@ const otherCont = document.getElementById('otherCont');
 const otherTop = document.getElementById('otherTop');
 const other = document.getElementById('other');
 createZip();
+
 function init() {
   createCard();
   createCity();
@@ -37,6 +52,18 @@ function init() {
   createOther();
   
 };
+const zipEnt = document.querySelector('.zipEnter')
+const zipSub = document.querySelector('.zipBtn') 
+
+zipSub.addEventListener('click', btnPress)
+
+
+function subZip() {
+  const zipEnt = document.querySelector('.zipEnter')
+  const zipSub = document.querySelector('.zipBtn') 
+  const test = zip.push(zipEnt.value);
+  return zip
+}
 
 
 
@@ -46,12 +73,16 @@ function createZip() {
     const zipEnter = document.createElement("input"); //creates input element
     const zipBtn = document.createElement('input');
     zipEnter.setAttribute('id','zipEnter') //this is how you add attributes to elements in JS. this is for an id of zipEnter
+    zipEnter.setAttribute('class','zipEnter')
     zipBtn.setAttribute('type','submit') // same thing as above line but sets zipBtn to be an actual btn
     zipBtn.setAttribute('value','submit zip code') //setting zipBtn value... see the trend?
+    zipBtn.setAttribute('class','zipBtn')
     zipBtn.setAttribute('id','zipBtn')
     main.insertAdjacentElement('afterbegin', zipEnter); //very helpful js command to choose where you want element to go
     main.insertAdjacentElement('afterbegin', zipBtn)  //main is the ID of the one div hardcoded to HTML
 };
+
+
 
 function createCard() {
   const makeCard = document.createElement('div');
@@ -198,7 +229,4 @@ function createOther() {
   otherCont.insertAdjacentElement('beforeend', createOtherImg)
   const otherImg = document.getElementById('otherImg')
   document.getElementById('otherImg').textContent = 'a sweet image will go here. im just trying to take up space for appropriate box size';
-
-
-
 }
