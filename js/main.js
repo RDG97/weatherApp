@@ -9,7 +9,28 @@ async function getData(url) {
     }
   }
 
-  const main = document.getElementById('main')
+const main = document.getElementById('main');
+const zipEnter = document.getElementById('zipEnter');
+const ace = document.getElementById('ace');
+const card = document.getElementById('cardBody');
+const cityContainer = document.getElementById('cityContainer');
+const cityTop = document.getElementById('cityTop')
+const cityName = document.getElementById('cityName');
+const tempContainer = document.getElementById('tempContainer');
+const tempTop = document.getElementById('tempTop');
+const tempSpan = document.getElementById('tempSpan');
+const temp1 = document.getElementById('temp1');
+const temp2 = document.getElementById('temp2');
+const temp3 = document.getElementById('temp3');
+const conditionContainer = document.getElementById('conditionContainer');
+const conditionTop = document.getElementById('conditionTop');
+const theCondition = document.getElementById('theCondition');
+const otherContainer = document.getElementById('otherContainer');
+const otherTop = document.getElementById('otherTop');
+const other = document.getElementById('other');
+
+
+
 
   function addEl() {
     const main = document.getElementById('main')
@@ -31,3 +52,14 @@ function createZip() {
     main.insertAdjacentElement('beforeend', zipEnter); //very helpful js command to choose where you want element to go
     main.insertAdjacentElement('beforeend', zipBtn)  //main is the ID of the one div hardcoded to HTML
 };
+
+function createCard() {
+  const makeCard = document.createElement('div');
+  makeCard.setAttribute('id','ace')
+  makeCard.setAttribute('class','card')
+  const makeCardBody = document.createElement('div');
+  makeCardBody.setAttribute('id','cardBody')
+  makeCardBody.setAttribute('class','card-body')
+  main.insertAdjacentElement('afterbegin', makeCard)
+  main.insertAdjacentElement('afterbegin', makeCardBody)
+}
