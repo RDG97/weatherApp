@@ -58,8 +58,9 @@ function createCard() {
   makeCard.setAttribute('id','ace')
   makeCard.setAttribute('class','card')
   const makeCardBody = document.createElement('div');
-  makeCardBody.setAttribute('id','cardBody')
-  makeCardBody.setAttribute('class','card-body')
-  main.insertAdjacentElement('afterbegin', makeCard)
-  main.insertAdjacentElement('afterbegin', makeCardBody)
-}
+  makeCardBody.setAttribute('id','cardBody');
+  makeCardBody.setAttribute('class','card-body');
+  main.insertAdjacentElement('afterbegin', makeCard);
+  const ace = document.getElementById('ace');
+  ace.insertAdjacentElement('afterbegin', makeCardBody);
+};
