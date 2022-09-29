@@ -37,6 +37,7 @@ function init() {
   createCond();
   addImg()
   createOther();
+  bgImg()
   
   
 };
