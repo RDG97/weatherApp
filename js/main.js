@@ -17,7 +17,9 @@ async function getData(url) {
   }
 }
 
-
+function clear(){
+  location.reload()
+}
 
 function btnPress() {
   subZip()
@@ -40,8 +42,11 @@ function init() {
 };
 const zipEnt = document.querySelector('.zipEnter')
 const zipSub = document.querySelector('.zipBtn') 
+const resetBtn = document.querySelector('.resetBtn')
 
 zipSub.addEventListener('click', btnPress)
+resetBtn.addEventListener('click', clear);
+
 
 
 function subZip() {
@@ -80,6 +85,11 @@ function cityAndCond() {
 function createZip() { 
     const zipEnter = document.createElement("input"); //creates input element
     const zipBtn = document.createElement('input');
+    const resetBtn = document.createElement('input');
+    resetBtn.setAttribute('id','resetBtn')
+    resetBtn.setAttribute('type','submit')
+    resetBtn.setAttribute('value','reset')
+    resetBtn.setAttribute('class','resetBtn')
     zipEnter.setAttribute('id','zipEnter') //this is how you add attributes to elements in JS. this is for an id of zipEnter
     zipEnter.setAttribute('class','zipEnter')
     zipBtn.setAttribute('type','submit') // same thing as above line but sets zipBtn to be an actual btn
@@ -87,7 +97,8 @@ function createZip() {
     zipBtn.setAttribute('class','zipBtn')
     zipBtn.setAttribute('id','zipBtn')
     main.insertAdjacentElement('afterbegin', zipEnter); //very helpful js command to choose where you want element to go
-    main.insertAdjacentElement('afterbegin', zipBtn)  //main is the ID of the one div hardcoded to HTML
+    main.insertAdjacentElement('afterbegin', zipBtn)
+    main.insertAdjacentElement('afterbegin', resetBtn)  //main is the ID of the one div hardcoded to HTML
 };
 function createCard() {
   const makeCard = document.createElement('div');
