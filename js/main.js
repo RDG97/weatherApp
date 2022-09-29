@@ -10,6 +10,7 @@ async function getData(url) {
       facts = response.data
       console.log(facts);
       init()
+
     } catch (error) {
       console.error('error!bad wesite or bad code! (its your code)');
     }
@@ -23,33 +24,18 @@ function btnPress() {
   pageTest()
 }
 
-const main = document.getElementById('main');
-const zipEnter = document.getElementById('zipEnter');
-const ace = document.getElementById('ace');
-const card = document.getElementById('cardBody');
-const cityCont = document.getElementById('cityCont');
-const cityTop = document.getElementById('cityTop')
-const cityName = document.getElementById('cityName');
-const tempCont = document.getElementById('tempCont');
-const tempTop = document.getElementById('tempTop');
-const tempSpan = document.getElementById('tempSpan');
-const temp1 = document.getElementById('temp1');
-const temp2 = document.getElementById('temp2');
-const temp3 = document.getElementById('temp3');
-const conditionContainer = document.getElementById('conditionContainer');
-const conditionTop = document.getElementById('conditionTop');
-const theCondition = document.getElementById('theCondition');
-const otherCont = document.getElementById('otherCont');
-const otherTop = document.getElementById('otherTop');
-const other = document.getElementById('other');
 createZip();
 
 function init() {
+  convertTemp();
   createCard();
+  cityAndCond()
   createCity();
   createTemps();
   createCond();
+  addImg()
   createOther();
+  
   
 };
 const zipEnt = document.querySelector('.zipEnter')
@@ -65,9 +51,31 @@ function subZip() {
   return zip
 }
 
+let imgName = '';
+let condDesc = '';
+let currentCond = '';
+let cityN = '';
+let K = '';
+let F = '';
+let C = '';
 
+function convertTemp() {
+  K = Math.ceil(facts.main.temp);
+  F =  Math.ceil(1.8*(K-273) + 32) + ' F';
+  C = Math.ceil(K - 273.15) + ' C';
+  K = K + ' K'
+  return C, F, K;
+}
 
+function addImg() {
+  imgName = 'img/' + facts.weather[0].icon + '.png';
+}
 
+function cityAndCond() {
+  cityN = facts.name
+  currentCond = facts.weather[0].main
+  condDesc = facts.weather[0].description
+}
 
 function createZip() { 
     const zipEnter = document.createElement("input"); //creates input element
@@ -81,9 +89,6 @@ function createZip() {
     main.insertAdjacentElement('afterbegin', zipEnter); //very helpful js command to choose where you want element to go
     main.insertAdjacentElement('afterbegin', zipBtn)  //main is the ID of the one div hardcoded to HTML
 };
-
-
-
 function createCard() {
   const makeCard = document.createElement('div');
   makeCard.setAttribute('id','ace')
@@ -121,7 +126,7 @@ function createCity() {
   cityCont.insertAdjacentElement('beforeend', makeCityName);
   const cityName = document.getElementById('cityName')
   cityName.insertAdjacentElement('afterbegin', makecName);
-  document.getElementById('cName').textContent = ':Lexington:';
+  document.getElementById('cName').textContent = cityN;
   const cityTop = document.getElementById('cityTop')
   cityTop.insertAdjacentElement('afterbegin', cityTitle)
   document.getElementById('cityTitle').textContent = 'City'
@@ -174,11 +179,10 @@ function createTemps() {
   const tempK = document.getElementById('tempK');
   const tempF = document.getElementById('tempF');
   const tempC = document.getElementById('tempC');
-  document.getElementById('tempK').textContent = ':K:';
-  document.getElementById('tempF').textContent = ':F:';
-  document.getElementById('tempC').textContent = ':C:';
+  document.getElementById('tempK').textContent = K;
+  document.getElementById('tempF').textContent = F;
+  document.getElementById('tempC').textContent = C;
 }
-
 function createCond() {
   const makeConditionCont = document.createElement('div');
   makeConditionCont.setAttribute('id','conditionCont');
@@ -204,7 +208,7 @@ function createCond() {
   const theCondition = document.getElementById('theCondition')
   theCondition.insertAdjacentElement('afterbegin', makeCond);
   const cond = document.getElementById('cond');
-  document.getElementById('cond').textContent = ':not great:';
+  document.getElementById('cond').textContent = currentCond + ', ' + condDesc;
 }
 
 function createOther() {
@@ -216,9 +220,9 @@ function createOther() {
   createOtherTop.setAttribute('class','row bg-warning');
   const createOtherTitle = document.createElement('h3');
   createOtherTitle.setAttribute('id','otherTitle');
-  const createOtherImg = document.createElement('p')
+  const createOtherImg = document.createElement('img')
   createOtherImg.setAttribute('id','otherImg');
-  createOtherImg.setAttribute('class','display-6');
+  createOtherImg.setAttribute('src',`${imgName}`);
   cardBody.insertAdjacentElement('beforeend', createOtherCont);
   const otherCont = document.getElementById('otherCont');
   otherCont.insertAdjacentElement('afterbegin', createOtherTop)
