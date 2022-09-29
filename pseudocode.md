@@ -113,3 +113,5 @@ Uses .setattribute to set id, class, anything else
 Uses insertAdjacentElement to add new element to html. This is nice because you can actually choose where exactly you want the element to go
 Some will also set element .textContent to be info pulled from response.data
 
+addImg()
+takes the img code and adds 'img/' and '.png'. then in the img tag the src is set to the variable this spits out
