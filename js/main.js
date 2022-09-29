@@ -1,32 +1,31 @@
 const apiKey = 'fe556d8602371420048f5a78bde5af9a'
-const zip = [];
-let facts = [];
+const zip = [];  //empty because the entered ZIP will be pushed here
+let facts = [];  // empty because the fetched response.data will be set here to be globally accessed
 function pageTest() {
 getData(`https://api.openweathermap.org/data/2.5/weather?zip=${zip[0]},us&appid=${apiKey}`);
 
 async function getData(url) {
-    try {
+    try { //if fetch is fulfulled it will make response.data global and run the init() function
       const response = await axios.get(url);
       facts = response.data
       console.log(facts);
       init()
-
-    } catch (error) {
+    } catch (error) {  // if fetch is not fulfilled console log a mean msg
       console.error('error!bad wesite or bad code! (its your code)');
     }
   }
 }
 
-function clear(){
+function clear(){  //this function is the same as refreshing a page. attached to a button
   location.reload()
 }
 
-function btnPress() {
+function btnPress() {  //ran when zip is submitted. attached to a button (who wouldve guessed)
   subZip()
   pageTest()
 }
 
-createZip();
+createZip();  //ran when the page is loaded to show zip field
 
 function init() {
   convertTemp();
@@ -36,27 +35,26 @@ function init() {
   createTemps();
   createCond();
   addImg()
-  createOther();
-  bgImg()
-  
-  
+  createOther();    
 };
+        //querySelectors for inputs. makes them usable in JS
 const zipEnt = document.querySelector('.zipEnter')
 const zipSub = document.querySelector('.zipBtn') 
 const resetBtn = document.querySelector('.resetBtn')
+
 
 zipSub.addEventListener('click', btnPress)
 resetBtn.addEventListener('click', clear);
 
 
-
+// submits what youve entered in the text field to the api link
 function subZip() {
   const zipEnt = document.querySelector('.zipEnter')
   const zipSub = document.querySelector('.zipBtn') 
   const test = zip.push(zipEnt.value);
   return zip
 }
-
+// vars set defaultly empty for global scope
 let imgName = '';
 let condDesc = '';
 let currentCond = '';
@@ -65,13 +63,15 @@ let K = '';
 let F = '';
 let C = '';
 
-function convertTemp() {
+function convertTemp() {      //does the match so you dont have to!
   K = Math.ceil(facts.main.temp);
   F =  Math.ceil(1.8*(K-273) + 32) + ' F';
   C = Math.ceil(K - 273.15) + ' C';
   K = K + ' K'
   return C, F, K;
 }
+
+//takes the icon were given and makes it a relative link
 
 function addImg() {
   imgName = 'img/' + facts.weather[0].icon + '.png';
@@ -82,6 +82,8 @@ function cityAndCond() {
   currentCond = facts.weather[0].main
   condDesc = facts.weather[0].description
 }
+
+//wall of text time. these functions create elements, gives them attributes, then appends them to the HMTL
 
 function createZip() { 
     const zipEnter = document.createElement("input"); //creates input element
@@ -246,3 +248,5 @@ function createOther() {
   const otherImg = document.getElementById('otherImg')
   document.getElementById('otherImg').textContent = 'a sweet image will go here. im just trying to take up space for appropriate box size';
 }
+
+//phew... wont be writing functions like that ever again. Moving forward, ill be smarter about it 
