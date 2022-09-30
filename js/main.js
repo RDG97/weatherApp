@@ -71,7 +71,7 @@ function convertTemp() {      //does the match so you dont have to!
   return C, F, K;
 }
 
-//takes the icon were given and makes it a relative link
+//takes the icon we're given and makes it a relative link
 
 function addImg() {
   imgName = 'img/' + facts.weather[0].icon + '.png';
